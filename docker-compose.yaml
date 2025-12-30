@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  web:
+    image: nginx:latest
+    container_name: web_app
+    ports:
+      - "8080:80"        # HostPort:ContainerPort
+    networks:
+      - app_network
+    restart: always
+
+  app:
+    image: vignesh3001/my-netflix-app:v2
+    container_name: test_app
+    working_dir: /app
+    ports:
+      - "3000:80"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
